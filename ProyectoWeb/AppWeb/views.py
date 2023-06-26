@@ -40,4 +40,4 @@ def buscar(request):
             return render(request, 'resultadosBusqueda.html', {'resultados': resultados})
     else:
         form = BusquedaForm()
-    return render(request, 'buscar.html', {'form': form})
+    return render(request, 'resultadoBusqueda.html', {'form': form})

@@ -1,5 +1,5 @@
 .navText{
-    color: white !important;
+    color: rgb(241, 7, 7) !important;
 }
 
 .contenido{
@@ -8,5 +8,5 @@
 }
 
 .componenteEntregables{
-    background-color: thistle;
+    background-color: rgb(186, 15, 186);
 }
