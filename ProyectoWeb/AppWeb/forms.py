@@ -1,10 +1,7 @@
 from django import forms
-from .models import Botines
 
-class setBotinesForm(forms.ModelForm):
-    class Meta:
-        model = Botines
-        fields = '__all__'
+class setBotinesform(forms.Form):
+    marca = forms.CharField(max_length=30)
+    talle = forms.IntegerField(max_value=30) 
+    
 
-class BusquedaForm(forms.Form):
-    termino_busqueda = forms.CharField(max_length=100)

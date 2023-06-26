@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from AppWeb.forms import * 
+from AppWeb.forms import *
 from .models import Botines
-
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -19,25 +19,26 @@ def canilleras(request):
 
 
 def setBotines(request):
-    
+
     if request.method == 'POST':
-      
-            botines =  Botines(request.post['marca'],(request.post['talle']))
- 
-            botines.save()
- 
-            return render(request, "AppWeb/inicio.html")
- 
+        botine = Botines(marca=request.POST["marca"],talle=request.POST["talle"] )
+        botine.save()
+        return render(request,"AppWeb/inicio.html")
+
     return render(request, "AppWeb/setBotines.html")
 
+
    
+def buscarBotines(request):
+    return render(request, "AppWeb/buscarBotines.html")
+  
+
 def buscar(request):
-    if request.method == 'POST':
-        form = BusquedaForm(request.POST)
-        if form.is_valid():
-            termino_busqueda = form.cleaned_data['termino_busqueda']
-            resultados = Botines.objects.filter(marca__icontains=termino_busqueda)
-            return render(request, 'resultadosBusqueda.html', {'resultados': resultados})
+    if request.GET["marca"]:
+        marca = request.GET["marca"]
+        botines = Botines.objects.filter(marca = marca)
+        return render(request, "AppWeb/buscarBotines.html", {"Botines":botines})
     else:
-        form = BusquedaForm()
-    return render(request, 'resultadoBusqueda.html', {'form': form})
+        respuesta = "No se enviaron datos"
+    
+    return HttpResponse(respuesta)
