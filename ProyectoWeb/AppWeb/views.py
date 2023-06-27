@@ -33,12 +33,22 @@ def buscarBotines(request):
     return render(request, "AppWeb/buscarBotines.html")
   
 
+#def buscar(request):
+#    if request.GET["marca"]:
+#        marca = request.GET["marca"]
+#        botines = Botines.objects.filter(marca = marca)
+#        return render(request, "AppWeb/buscarBotines.html", {"Botines":botines})
+#    else:
+#        respuesta = "No se enviaron datos"
+#    
+#    return HttpResponse(respuesta)
+
 def buscar(request):
-    if request.GET["marca"]:
+    form = BuscarBotinesform()
+
+    if request.GET.get("marca"):
         marca = request.GET["marca"]
-        botines = Botines.objects.filter(marca = marca)
-        return render(request, "AppWeb/buscarBotines.html", {"Botines":botines})
-    else:
-        respuesta = "No se enviaron datos"
-    
-    return HttpResponse(respuesta)
+        botines = Botines.objects.filter(marca=marca)
+        return render(request, "AppWeb/buscarBotines.html", {"botines": botines, "form": form})
+
+    return render(request, "AppWeb/buscarBotines.html", {"form": form})

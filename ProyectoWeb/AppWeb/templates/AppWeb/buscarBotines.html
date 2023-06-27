@@ -1,23 +1,19 @@
-<div>
+{% extends "AppWeb/botines.html" %}
+{% load static %}
 
-    {% extends "AppWeb/botines.html" %}
-    {% load static %}
+{% block buscarBotines %}
+    <p>Buscar Botines</p>
+    <form action="{% url 'buscar' %}" method="get">
+        {{ form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
 
-    {% block buscarBotines %}
-
-        <p>Buscar Botines</p>
-        <form action="/AppWeb/buscar/" method="get">
-            <input placeholder="marca" type="text" name = "marca" id = "marca">
-            <input type="submit" value="buscar">
-            
-
-        </form>
-            {% if botines %}
-            {% for botine in botines %}
-                <li> {{botine.marca}} </li>
-                <li> {{botine.talle}} </li>
+    {% if botines %}
+        <h3>Resultados de búsqueda:</h3>
+        <ul>
+            {% for botin in botines %}
+                <li>{{ botin.marca }}</li>
             {% endfor %}
-        {% endif %}
-    {% endblock %}    
-
-</div>
+        </ul>
+    {% endif %}
+{% endblock %}
